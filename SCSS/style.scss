@@ -1,0 +1,581 @@
+@import "mixin";
+$cWhite: white;
+$cBlack: black;
+
+html {
+  font-family: "Teko", "Yusei Magic", sans-serif;
+}
+
+header {
+  background-color: lightskyblue;
+  height: 200px;
+  width: 100vw;
+  position: relative;
+  right: 8px;
+  bottom: 8px;
+}
+
+// index.htmlのCSS
+
+.main {
+  position: relative;
+}
+
+.logo {
+  display: inline-flex;
+
+  & img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    position: relative;
+    top: 50px;
+  }
+}
+
+.title {
+  font-size: 45px;
+  display: inline-flex;
+  position: relative;
+  height: 150px;
+
+  & a {
+    text-decoration: none;
+    color: $cBlack;
+    cursor: pointer;
+    position: relative;
+    bottom: 20px;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  // position: relative;
+  // top: -115px;
+  margin-top: -30px;
+
+  & a {
+    color: $cBlack;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 0 5px;
+    margin: 0 20px;
+
+    &:hover {
+      color: blue;
+      border-bottom: 2px blue solid;
+    }
+  }
+}
+
+#about li.abo a {
+  opacity: 0.5;
+}
+
+#works li.wor a {
+  opacity: 0.5;
+}
+
+#contact li.con a {
+  opacity: 0.5;
+}
+
+// .mem {
+//   position: relative;
+//   left: 60px;
+//   top: 100px;
+// }
+
+// .con {
+//   position: relative;
+//   left: 360px;
+//   top: 100px;
+// }
+
+// .wor {
+//   position: relative;
+//   left: 660px;
+//   top: 100px;
+// }
+
+// .abo {
+//   position: relative;
+//   left: 960px;
+//   top: 100px;
+// }
+
+/*==ヘッダーのテキストナビゲーションの形状*/
+#g-navi {
+  margin-top: -30px;
+}
+
+#g-navi ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#g-navi ul li a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 0 5px;
+  margin: 0 20px;
+  // border: 1px black solid;
+}
+
+#g-navi ul li.current a,
+#g-navi ul li a:hover {
+  color: blue;
+}
+
+.cover-slide {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  top: -7.6px;
+  left: -7.6px;
+
+  & img {
+    width: 100vw;
+    height: 600px;
+    object-fit: cover;
+    object-position: 30% 7%;
+    vertical-align: bottom;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #eaebe6;
+    opacity: 0;
+  }
+  &.inview {
+    &::after {
+      opacity: 1;
+      @include animation($name: kf-cover-slide, $duration: 1.6s, $timing-function: ease-in-out);
+    }
+  }
+}
+
+@keyframes kf-cover-slide {
+  0% {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  50% {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+
+  50.1% {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+}
+
+.img-zoom {
+  opacity: 0;
+
+  .inview & {
+    opacity: 1;
+    transition: transform 0.3s ease;
+    @include animation($name: kf-img-show, $duration: 1.6s, $timing-function: ease-in-out, $fill-mode: none);
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+}
+
+@keyframes kf-img-show {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  50.1% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.hover-darken {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+    pointer-events: none;
+    @include animation($name: kf-img-show, $duration: 1.6s, $timing-function: ease-in-out, $fill-mode: none);
+  }
+  &:hover::before {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.sub_title {
+  text-align: center;
+  line-height: 1;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-size: 50px;
+  margin-bottom: -30px;
+}
+
+.dir {
+  width: 300px;
+  height: 450px;
+
+  & .text {
+    margin-top: 50px;
+  }
+}
+
+.des {
+  width: 300px;
+  height: 450px;
+
+  & .text {
+    margin-top: 50px;
+  }
+}
+
+.cod {
+  width: 300px;
+  height: 450px;
+
+  & .text {
+    margin-top: 50px;
+  }
+}
+
+.ser {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon img {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  left: 100px;
+  top: 30px;
+}
+
+.try {
+  .btn {
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    perspective: 3000px;
+    width: 150px;
+    height: 50px;
+    margin: 0 auto;
+    cursor: pointer;
+
+    &.cubic {
+      & span {
+        position: absolute;
+        top: 25px;
+        left: 18px;
+        width: 250px;
+        height: 50px;
+        border: 5px solid black;
+        line-height: 58px;
+        text-align: center;
+        transition: all 0.3s;
+        font-size: 50px;
+      }
+
+      & .hovering {
+        background-color: $cBlack;
+        color: $cWhite;
+        transform: rotateX(90deg);
+        transform-origin: center center -25px;
+        font-size: 30px;
+      }
+
+      & .default {
+        background-color: $cWhite;
+        color: $cBlack;
+        transform: rotateX(0);
+        transform-origin: center center -25px;
+      }
+
+      &:hover {
+        & .hovering {
+          transform: rotateX(0);
+        }
+
+        & .default {
+          transform: rotateX(-90deg);
+        }
+      }
+    }
+  }
+}
+
+.works {
+  margin-top: 150px;
+
+  & h2 {
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 65px;
+    margin-bottom: -15px;
+  }
+
+  & p {
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 40px;
+  }
+}
+
+.sns_btn {
+  display: flex;
+  justify-content: flex-end;
+  letter-spacing: 20px;
+}
+
+// about.htmlのCSS
+
+.about_title {
+  line-height: 1;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-size: 50px;
+  width: 70%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.prof {
+  margin: 0 auto;
+  width: 70%;
+
+  .about_text {
+    text-align: left;
+    line-height: 40px;
+  }
+}
+
+.sub_prof {
+  margin: 0 auto;
+  width: 70%;
+  height: 200px;
+  margin-top: 50px;
+  padding-bottom: 150px;
+
+  .about_img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .sub_list {
+    list-style: none;
+    position: relative;
+    left: 220px;
+    bottom: 235px;
+    line-height: 45px;
+
+    .sub_list_text {
+      display: flex;
+
+      .list1 {
+        letter-spacing: 10px;
+        // border: $cBlack 1px solid;
+        padding-right: 20px;
+      }
+
+      .list2 {
+        letter-spacing: 30px;
+      }
+    }
+  }
+}
+
+// works.htmlのCSS
+
+.main_works {
+  height: 625px;
+  width: 100vw;
+  text-align: center;
+}
+
+.ml4 {
+  position: relative;
+  font-weight: 900;
+  font-size: 200px;
+  z-index: -1;
+
+  & .letters {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0.3em;
+    right: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+}
+
+// contact.htmlのCSS
+
+.contact_title {
+  line-height: 1;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-size: 50px;
+  width: 70%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact_prof {
+  margin: 0 auto;
+  width: 70%;
+
+  .contact_text {
+    text-align: left;
+    line-height: 40px;
+  }
+}
+
+.contact_form {
+  margin: 0 auto;
+  width: 70%;
+  padding-top: 50px;
+
+  .form {
+    padding: 10px 0px 50px 0px;
+  }
+
+  .Required {
+    margin-left: 10px;
+    background-color: red;
+    padding: 2px;
+    color: $cWhite;
+  }
+}
+
+// サイドバーのCSS
+
+// .side {
+//   display: none;
+//   position: fixed;
+//   top: 70%;
+//   transform: translateY(-50%);
+//   transition: all 0.3s ease-in;
+
+//   & .tween-animate-title {
+//     color: $cBlack;
+//     text-decoration: none !important;
+//     margin: 0 40px;
+//     vertical-align: middle;
+//     letter-spacing: 2px;
+//   }
+
+//   &.left {
+//     left: -50px;
+
+//     &.inview {
+//       left: 50px;
+//     }
+
+//     & .side__inner {
+//       transform-origin: top left;
+//       transform: rotate(-90deg);
+//     }
+//   }
+//   &.right {
+//     right: -50px;
+
+//     &.inview {
+//       right: 50px;
+//     }
+
+//     & .side__inner {
+//       transform-origin: top right;
+//       transform: rotate(90deg);
+//     }
+//   }
+// }
+
+// .icon {
+//   position: relative;
+
+//   @include p-base($left: -20px, $top: 50%, $width: 1em, $height: 1em) {
+//     transform: translateY(-50%);
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: contain;
+//   }
+
+//   &.twitter {
+//     &::before {
+//       background-image: url(/写真/twitter.svg);
+//     }
+//   }
+//   &.fb {
+//     &::before {
+//       background-image: url(/写真/facebook.svg);
+//     }
+//   }
+// }
+
+// footerのCSS
+
+footer {
+  background-color: lightskyblue;
+  width: 100vw;
+  position: relative;
+  right: 8px;
+  bottom: -8px;
+  height: 100px;
+
+  .sns_btn {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+  }
+
+  .sns {
+    cursor: pointer;
+    margin-right: 20px;
+    position: relative;
+    top: 30px;
+  }
+
+  .copy_right {
+    width: 100vw;
+    text-align: center;
+    margin-top: -20px;
+  }
+}
